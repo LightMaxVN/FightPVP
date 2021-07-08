@@ -22,7 +22,6 @@ public class FileManager {
                 //owo
             }
         }
-
         customFile = YamlConfiguration.loadConfiguration(file);
     }
 
@@ -34,7 +33,7 @@ public class FileManager {
         try{
             customFile.save(file);
         }catch (IOException e){
-            System.out.println("Cannot save file!");
+            System.out.println("[FightPvP] Could not save the file!");
         }
     }
 

@@ -11,20 +11,21 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         PluginManager pm = getServer().getPluginManager();
+
         ItemCreateArena.init();
         FileManager.setup();
         FileManager.get().options().copyDefaults(true);
         FileManager.save();
         pm.registerEvents(new EventManager(this), this);
         this.getCommand("thachdau").setExecutor(new CommandsPvP(this));
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
+        this.getConfig().options().copyDefaults();
+        this.saveDefaultConfig();
 
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        FileManager.save();
         saveDefaultConfig();
     }
 
