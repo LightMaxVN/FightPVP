@@ -1,0 +1,10 @@
+name: FightPvP
+version: ${project.version}
+main: me.lightingmax.fightpvp.Main
+api-version: 1.15
+authors: [ LightMax_VN ]
+description: Plugin được tạo ra để tạo 1 đấu trường để member trong server survival đấu với nhau ngoài warp pvp
+website: www.mineviet.com
+commands:
+  thachdau:
+    description: A thachdau command

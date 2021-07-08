@@ -1,0 +1,51 @@
+#######################################################################################
+#                                                                                     #
+#                                                                                     #
+#          Plugin developer: LightMax_VN       My Server: MINEVIET.COM                #
+#                                                                                     #
+#             Cảm ơn các bạn đã download plugin này                                   #
+#                                                                                     #
+#                                                                                     #
+#                        Plugin này chỉ dùng trong server survival                    #
+#                   Để các member pvp, solo với nhau không cần warp pvp               #
+#                                                                                     #
+#######################################################################################
+
+
+Prefix: '&c&l[&9&lTHÁCH ĐẤU &c&l]'
+Help:
+  - '&a&m---------------------&f &e&lTHÁCH ĐẤU &a&m---------------------&f'
+  - '&e/thachdau help: &7hiện ra trang này'
+  - '&e/thachdau invite <tên người chơi>: &7Để gạ pvp mấy thanh niên (Hiện tại tiền đặc cọc đang code)'
+  - '&e/thachdau cancel: &7Hùy gạ kèo'
+  - '&e/thachdau accept/deny: &7Chấp nhận/từ chối với thanh niên khác'
+  - '&e/thachdau admin help: &7Trang trợ giúp của admin'
+  - '&a&m-----------------------------------------------------&f'
+Help-Admin:
+  - '&a&m---------------------&f &e&lTHÁCH ĐẤU &a&m---------------------&f'
+  - '&e/thachdau admin help: &7hiện ra trang này'
+  - '&e/thachdau help: &7hiện ra trang trợ giúp member'
+  - '&e/thachdau reload: tải lại plugin'
+  - '&e/thachdau create <tên arena>: Tạo một đấu trường!'
+  - '&e/thachdau forcestart: Bắt đầu 1 đấu trường &c(Đang code)'
+  - '&e/thachdau remove <tên arena>: Xóa một đấu trường'
+  - '&e/thachdau <import> <tên arena>: import 1 đấu trường nếu được tạo trong ArenaDatabase.yml (đang code)'
+  - '&cLưu ý: Tên đấu trường phải trên 3 kí tự!'
+  - '&f &f &f: &cNhững lệnh có phần &c"(Đang code)" thì đừng dùng vì có thể có lỗi'
+  - '&a&m-----------------------------------------------------&f'
+ConsoleReply: '&cConsole không thể dùng lệnh này được!'
+NoPermission: '&cBạn không có đủ quyền hạn để làm điều này'
+NameLength: '&cTên của arena cần phải ít nhất trên 3 kí tự'
+CreatedArena: '&aĐã tạo một một đấu trường tên {arenaname}.'
+SuccessAddWorld: '&aĐã thành công chỉnh đấu trường {arenaname} ở thế giới {world}'
+Reloaded: '&aĐã reload plugin thành công'
+MissAgrument: '&cBạn đã không điền đủ thông tin: /thachdau create <arena name>, tên arena trên 3 kí tự'
+SetLocation1: '&eĐã chỉnh vị trí cho người chơi 1 thành công!'
+SetLocation2: '&eĐã chỉnh vị trí cho người chơi 2 thành công!'
+Removed: '&cĐã xóa thành công đấu trường {arenaname}!'
+NotAnExistArena: '&cĐấu trường không tồn tại!'
+DontHaveInvite: 'Bạn không nhận được bất kì lời thách đấu nào cả!'
+OfflineOrNotExistPlayer: 'Người chơi không tồn tại hoặc online'
+SelfInvite: 'Bạn không thể thách đấu chính bản thân của bạn!'
+SendedInvite: 'Bạn đã gửi lời mời cho {targetplayer}, {targetplayer} có 60 giây để trả lời'
+CantMoveTillTheMatchStart: '&cBạn không thể di chuyển cho đến khi trận đấu bắt đầu'
