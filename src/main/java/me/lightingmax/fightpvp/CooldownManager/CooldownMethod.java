@@ -1,6 +1,7 @@
 package me.lightingmax.fightpvp.CooldownManager;
 
 import me.lightingmax.fightpvp.CommandsPvP;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class CooldownMethod extends BukkitRunnable {
@@ -21,8 +22,7 @@ public class CooldownMethod extends BukkitRunnable {
             CommandsPvP.inplayingplayer1.add(CommandsPvP.player1);
             return;
         }
-
-        CommandsPvP.player1.sendMessage("Trận đấu bắt đầu trong " + timeleft + "giây!");
-        CommandsPvP.player2.sendMessage("Trận đấu bắt đầu trong " + timeleft + "giây!");
+        CommandsPvP.player1.sendMessage(ChatColor.YELLOW + "Trận đấu bắt đầu trong " + ChatColor.GOLD + timeleft + ChatColor.YELLOW + "giây!");
+        CommandsPvP.player2.sendMessage(ChatColor.YELLOW + "Trận đấu bắt đầu trong " + ChatColor.GOLD + timeleft + ChatColor.YELLOW + "giây!");
     }
 }

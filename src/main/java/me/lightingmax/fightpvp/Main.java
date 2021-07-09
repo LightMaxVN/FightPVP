@@ -11,7 +11,6 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         PluginManager pm = getServer().getPluginManager();
-
         ItemCreateArena.init();
         FileManager.setup();
         FileManager.get().options().copyDefaults(true);

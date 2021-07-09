@@ -17,6 +17,7 @@ public class GameControlTimer extends BukkitRunnable {
             cancel();
             this.gameControlPlayer = new GameControlPlayer();
             this.gameControlPlayer.cancel();
+            CommandsPvP.isArenaIsActive = false;
             CommandsPvP.inplayingplayer1.remove(CommandsPvP.player1);
             CommandsPvP.inplayingplayer2.remove(CommandsPvP.player2);
             Bukkit.broadcastMessage("Trận đấu giữa " + CommandsPvP.player1.getName() + " và " + CommandsPvP.player2 + " đã hòa!");

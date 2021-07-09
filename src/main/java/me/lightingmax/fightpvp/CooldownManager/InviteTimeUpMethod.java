@@ -1,6 +1,7 @@
 package me.lightingmax.fightpvp.CooldownManager;
 
 import me.lightingmax.fightpvp.CommandsPvP;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class InviteTimeUpMethod extends BukkitRunnable {
@@ -18,7 +19,7 @@ public class InviteTimeUpMethod extends BukkitRunnable {
                 cancel();
                 CommandsPvP.isgettinginvited.remove(CommandsPvP.player2);
                 CommandsPvP.whocancel.remove(CommandsPvP.player1);
-                CommandsPvP.player2.sendMessage("Lời mời thách đấu đến bạn đã hết hạn!");
+                CommandsPvP.player2.sendMessage(ChatColor.RED + "Lời mời thách đấu đến bạn đã hết hạn!");
             }
         }
     }

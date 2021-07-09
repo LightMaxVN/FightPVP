@@ -68,23 +68,35 @@ public class CommandsPvP implements CommandExecutor {
         } else {
             Player p = (Player) sender;
             if(cmd.getName().equalsIgnoreCase("thachdau")) {
-                if(args.length == 1 && args[0].equalsIgnoreCase("cancel") && whocancel.contains(player1)) {
-                    isgettinginvited.remove(player2);
-                    whocancel.remove(player1);
-                    player1.sendMessage("Bạn đang hủy thành công cuộc giao kèo");
+
+
+                if(args.length == 1 && args[0].equalsIgnoreCase("cancel")) {
+                    if (whocancel.contains(player1)) {
+                        isgettinginvited.remove(player2);
+                        whocancel.remove(player1);
+                        player1.sendMessage(ChatColor.GREEN + "Bạn đang hủy thành công cuộc giao kèo");
+                        return true;
+                    }else {
+                        p.sendMessage(ChatColor.RED + "Bạn không gửi bất kì lời mời thách đấu nào cả!");
+                    }
                     return true;
-                }else{
-                    p.sendMessage("Bạn không gửi bất kì lời mời thách đấu nào cả!");
                 }
 
-                if(args.length == 1 && args[0].equalsIgnoreCase("deny") && isgettinginvited.contains(player2)) {
-                    whocancel.remove(player1);
-                    isgettinginvited.remove(player2);
-                    player2.sendMessage("Bạn đã từ chối cuộc thách đấu của {player}".replace("{player}", player1.getName()));
+
+                if(args.length == 1 && args[0].equalsIgnoreCase("deny")) {
+                    if(isgettinginvited.contains(player2)) {
+                        whocancel.remove(player1);
+                        isgettinginvited.remove(player2);
+                        player2.sendMessage(ChatColor.GREEN + "Bạn đã từ chối cuộc thách đấu của " + ChatColor.GOLD + "{player}".replace("{player}", player1.getName()));
+                        return true;
+                    }else{
+                        p.sendMessage(ChatColor.RED + "Bạn không nhận được bất kì lời thách đấu nào cả!");
+                    }
                     return true;
-                }else{
-                    p.sendMessage("Bạn không nhận được bất kì lời thách đấu nào cả!");
                 }
+
+
+
 
                 if (args.length == 1 && args[0].equalsIgnoreCase("accept")) {
                     if(isgettinginvited.contains(p)) {
@@ -148,7 +160,7 @@ public class CommandsPvP implements CommandExecutor {
 
                         return true;
                     } else {
-                        p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("DontHaveInvite")));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("DontHaveInvite"))));
                     }
                     return true;
                 }
@@ -158,18 +170,18 @@ public class CommandsPvP implements CommandExecutor {
                     targetplayer = Bukkit.getPlayer(args[1]);
                     if (!isArenaIsActive) {
                         if (targetplayer == null) {
-                            p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("OfflineOrNotExistPlayer")));
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("OfflineOrNotExistPlayer"))));
                             return true;
                         } else if (targetplayer == p) {
-                            p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("SelfInvite")));
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("SelfInvite"))));
                             return true;
                         }
                         player1 = p;
                         player2 = targetplayer;
                         isgettinginvited.add(player2);
                         whocancel.add(p);
-                        p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("SendedInvite")).replace("{targetplayer}", player2.getDisplayName()));
-                        targetplayer.sendMessage("Người chơi {player} đã gửi cho bạn lời mời thách đấu. Bạn có 60 giây để trả lời!!".replace("{player}", player1.getDisplayName()));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("SendedInvite")).replace("{targetplayer}", player2.getName())));
+                        targetplayer.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aNgười chơi &e{player} &ađã gửi cho bạn lời mời thách đấu. Bạn có 60 giây để trả lời!!".replace("{player}", player1.getName())));
                         this.inviteTimeUpMethod = new InviteTimeUpMethod();
                         this.inviteTimeUpMethod.runTaskTimer(plugin, 0, 20);
                         return true;
@@ -201,7 +213,7 @@ public class CommandsPvP implements CommandExecutor {
                     }
                 }
 
-                if (args.length == 2 && args[0].equalsIgnoreCase("admin") && args[1].equalsIgnoreCase("help")) {
+                if (args.length == 2 && args[0].equalsIgnoreCase("admin") && args[1].equalsIgnoreCase("help") && p.hasPermission("thachdau.admin")) {
                     for (String msg : plugin.getConfig().getStringList("Help-Admin")) {
                         p.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
                     }
@@ -247,7 +259,7 @@ public class CommandsPvP implements CommandExecutor {
                             p.getInventory().setItem(3, ItemCreateArena.LocationP1);
                             p.getInventory().setItem(4, ItemCreateArena.LocationP2);
                             p.getInventory().setItem(8, ItemCreateArena.TurnOffEditMode);
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("CreatedArena"))).replace("{arenaname}", ArenaName));
+                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("CreatedArena")).replace("{arenaname}", ArenaName)));
                             return true;
                         } else {
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("NoPermission"))));

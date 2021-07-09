@@ -17,15 +17,16 @@ public class GameControlPlayer extends BukkitRunnable {
 
     private EndArenaBackTime endArenaBackTime;
 
+    private int playerlist = 0;
+
     @Override
     public void run() {
-        int playerlist = 0;
         for(Player playercheck : Bukkit.getServer().getOnlinePlayers()) {
             if(playercheck.getWorld().getName().equals(FileManager.get().getString("ArenaList." + CommandsPvP.ChoseMap + ".World")) && CommandsPvP.inwatingplayer1.contains(playercheck) || CommandsPvP.inplayingplayer2.contains(playercheck)) {
                 playerlist = playerlist + 1;
             }
         }
-        if(playerlist == 1) {
+        if((playerlist % 2) != 0) {
             CommandsPvP.MapIsRunning.remove(CommandsPvP.ChoseMap);
             for(Player getplayername : Bukkit.getServer().getOnlinePlayers()) {
                 if(getplayername.getWorld().getName().equals("ArenaList." + CommandsPvP.ChoseMap + ".World")) {
@@ -36,6 +37,7 @@ public class GameControlPlayer extends BukkitRunnable {
                         this.gameControlTimer.cancel();
                         this.endArenaBackTime = new EndArenaBackTime();
                         this.endArenaBackTime.runTaskTimer((Plugin) this, 0, 20);
+                        CommandsPvP.isArenaIsActive = false;
                         WhoWonGame = CommandsPvP.player1;
                         CommandsPvP.player1.sendMessage("Chúc mừng bạn đã thắng cuộc thách đấu này");
                         CommandsPvP.inplayingplayer1.remove(CommandsPvP.player1);
@@ -49,6 +51,7 @@ public class GameControlPlayer extends BukkitRunnable {
                         this.gameControlTimer = new GameControlTimer();
                         this.gameControlTimer.cancel();
                         this.endArenaBackTime = new EndArenaBackTime();
+                        CommandsPvP.isArenaIsActive = false;
                         this.endArenaBackTime.runTaskTimer((Plugin) this, 0, 20);
                         CommandsPvP.player2.sendMessage("Chúc mừng bạn đã thắng cuộc thách đấu này");
                         CommandsPvP.inplayingplayer1.remove(CommandsPvP.player1);

@@ -96,21 +96,13 @@ public class EventManager implements Listener {
         }
         if(meta.getDisplayName().equals(ChatColor.RED + "Turn off Edit Mode")) {
             if (action.equals(Action.RIGHT_CLICK_AIR)) {
-                if(FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.MapName) && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".World") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player1" + ".x") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player2" + ".x")) {
                     CommandsPvP.MapName.add(CommandsPvP.ArenaName);
                     p.getInventory().clear();
                     plugin.saveConfig();
-                }else{
-                    p.sendMessage(ChatColor.RED + "Bạn chưa hoàn thành xong 1 đấu trường!");
-                }
             }else{
                 if(action.equals(Action.RIGHT_CLICK_BLOCK)) {
-                    if(FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.MapName) && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".World") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player1" + ".x") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player2" + ".x")) {
-                        p.getInventory().clear();
-                        plugin.saveConfig();
-                    }else{
-                        p.sendMessage(ChatColor.RED + "Bạn chưa hoàn thành xong 1 đấu trường!");
-                    }
+                    p.getInventory().clear();
+                    plugin.saveConfig();
                 }
             }
         }
@@ -148,11 +140,9 @@ public class EventManager implements Listener {
     public void onPreparePvP(PlayerMoveEvent e) {
         if(CommandsPvP.inwatingplayer1.contains(CommandsPvP.player1)) {
             e.setCancelled(true);
-            CommandsPvP.player1.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("CantMoveTillTheMatchStart"))));
         }
         if(CommandsPvP.inwatingplayer2.contains(CommandsPvP.player2)) {
             e.setCancelled(true);
-            CommandsPvP.player2.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("CantMoveTillTheMatchStart"))));
         }
     }
 }
