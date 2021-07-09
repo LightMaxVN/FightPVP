@@ -68,20 +68,24 @@ public class CommandsPvP implements CommandExecutor {
         } else {
             Player p = (Player) sender;
             if(cmd.getName().equalsIgnoreCase("thachdau")) {
-/*                if(args.length == 1 && args[0].equalsIgnoreCase("cancel") && whocancel.contains(player1)) {
+                if(args.length == 1 && args[0].equalsIgnoreCase("cancel") && whocancel.contains(player1)) {
                     isgettinginvited.remove(player2);
                     whocancel.remove(player1);
                     player1.sendMessage("Bạn đang hủy thành công cuộc giao kèo");
+                    return true;
                 }else{
                     p.sendMessage("Bạn không gửi bất kì lời mời thách đấu nào cả!");
-                } //hủy kèo
+                }
+
                 if(args.length == 1 && args[0].equalsIgnoreCase("deny") && isgettinginvited.contains(player2)) {
                     whocancel.remove(player1);
                     isgettinginvited.remove(player2);
-                    player2.sendMessage("Bạn đã từ chối cuộc thách đấu của {player}".replace("{player}", (CharSequence) player1));
+                    player2.sendMessage("Bạn đã từ chối cuộc thách đấu của {player}".replace("{player}", player1.getName()));
+                    return true;
                 }else{
                     p.sendMessage("Bạn không nhận được bất kì lời thách đấu nào cả!");
-                } //deny*/
+                }
+
                 if (args.length == 1 && args[0].equalsIgnoreCase("accept")) {
                     if(isgettinginvited.contains(p)) {
                         whocancel.remove(player1);
@@ -115,8 +119,14 @@ public class CommandsPvP implements CommandExecutor {
                         Location locationplayer1 = player1.getLocation();
                         Location locationplayer2 = player2.getLocation();
 
-                        locationp1willtp = new Location(worldp1now, locationplayer1.getX(), locationplayer1.getY(), locationplayer1.getZ());
-                        locationp2willtp = new Location(worldp2now, locationplayer2.getX(), locationplayer2.getY(), locationplayer2.getZ());
+                        float yawp1 = player1.getLocation().getYaw();
+                        float yawp2 = player2.getLocation().getYaw();
+
+                        float pitchp1 = player1.getLocation().getPitch();
+                        float pitchp2 = player2.getLocation().getPitch();
+
+                        locationp1willtp = new Location(worldp1now, locationplayer1.getX(), locationplayer1.getY(), locationplayer1.getZ(), yawp1, pitchp1);
+                        locationp2willtp = new Location(worldp2now, locationplayer2.getX(), locationplayer2.getY(), locationplayer2.getZ(), yawp2, pitchp2);
 
                         Location locp1 = new Location(world, loc1, loc2, loc3, yaw1, pitch1);
                         Location locp2 = new Location(world, loc4, loc5, loc6, yaw2, pitch2);
@@ -220,13 +230,14 @@ public class CommandsPvP implements CommandExecutor {
                     plugin.saveConfig();
                     FileManager.reload();
                     FileManager.save();
+                    for(int i = 0; i <= MapName.size(); i++) {
+                        if(!FileManager.get().isConfigurationSection("ArenaName." + MapName.get(i))) {
+                            MapName.remove(MapName.get(i));
+                        }
+                    }
                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("Reloaded"))));
                     return true;
                 }
-
-
-
-
                 if (args.length >= 2) {
                     if (args[0].equalsIgnoreCase("create")) {
                         if (args[1].length() > 3 && p.hasPermission("thachdau.create")) {
@@ -236,7 +247,6 @@ public class CommandsPvP implements CommandExecutor {
                             p.getInventory().setItem(3, ItemCreateArena.LocationP1);
                             p.getInventory().setItem(4, ItemCreateArena.LocationP2);
                             p.getInventory().setItem(8, ItemCreateArena.TurnOffEditMode);
-                            MapName.add(ArenaName);
                             p.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("CreatedArena"))).replace("{arenaname}", ArenaName));
                             return true;
                         } else {
@@ -264,5 +274,4 @@ public class CommandsPvP implements CommandExecutor {
         }
         return true;
     }*/
-
 }

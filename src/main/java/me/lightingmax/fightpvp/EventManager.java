@@ -96,12 +96,21 @@ public class EventManager implements Listener {
         }
         if(meta.getDisplayName().equals(ChatColor.RED + "Turn off Edit Mode")) {
             if (action.equals(Action.RIGHT_CLICK_AIR)) {
-                p.getInventory().clear();
-                plugin.saveConfig();
-            }else{
-                if(action.equals(Action.RIGHT_CLICK_BLOCK)) {
+                if(FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.MapName) && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".World") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player1" + ".x") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player2" + ".x")) {
+                    CommandsPvP.MapName.add(CommandsPvP.ArenaName);
                     p.getInventory().clear();
                     plugin.saveConfig();
+                }else{
+                    p.sendMessage(ChatColor.RED + "Bạn chưa hoàn thành xong 1 đấu trường!");
+                }
+            }else{
+                if(action.equals(Action.RIGHT_CLICK_BLOCK)) {
+                    if(FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.MapName) && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".World") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player1" + ".x") && FileManager.get().isConfigurationSection("ArenaList." + CommandsPvP.ArenaName + ".Player2" + ".x")) {
+                        p.getInventory().clear();
+                        plugin.saveConfig();
+                    }else{
+                        p.sendMessage(ChatColor.RED + "Bạn chưa hoàn thành xong 1 đấu trường!");
+                    }
                 }
             }
         }
